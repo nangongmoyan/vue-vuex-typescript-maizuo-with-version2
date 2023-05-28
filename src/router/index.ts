@@ -1,22 +1,47 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
 
 Vue.use(VueRouter)
 
 const routes: Array<RouteConfig> = [
   {
-    path: '/',
-    name: 'home',
-    component: HomeView
+    path: '/films',
+    name: '',
+    component: () => import(/* webpackChunkName: 'films' */ '@/views/films/index.vue'),
+    children: [
+      {
+        path: '/films/nowPlaying',
+        name: 'NowPlaying',
+        component: () => import(/* webpackChunkName: 'NowPlaying' */ '@/views/films/NowPlaying.vue')
+      }, {
+        path: '/films/comingSoon',
+        name: 'ComingSoon',
+        component: () => import(/* webpackChunkName: 'ComingSoon' */ '@/views/films/ComingSoon.vue')
+      },
+      {
+        path: '/films',
+        redirect: '/films/nowPlaying'
+      }
+    ]
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+    path: '/film/:filmId',
+    name: 'FilmDetail',
+    component: () => import(/* webpackChunkName: 'filmDetail' */ '@/views/film/FilmDetail.vue')
+  },
+  {
+    path: '/cinemas',
+    name: '',
+    component: () => import(/* webpackChunkName: 'cinemas' */ '@/views/cinemas/index.vue')
+  },
+  {
+    path: '/center',
+    name: '',
+    component: () => import(/* webpackChunkName: 'center' */ '@/views/center/index.vue')
+  },
+  {
+    path: '*',
+    redirect: '/films'
   }
 ]
 
