@@ -1,5 +1,5 @@
 <template>
-  <div class="header-bar-main" :style="isDownScroll?{background:'white', 'border-bottom': '0.5px solid #d2d6dc'}:{background : 'transparent'}">
+  <div class="nav-bar-main" :style="isDownScroll?{background:'white', 'border-bottom': '0.5px solid #d2d6dc'}:{background : 'transparent'}">
     <div class="goBack" @click="goBack">
       <img src="@/assets/img/film-detail-back.png" alt="back">
     </div>
@@ -11,7 +11,7 @@
 import Vue from 'vue'
 
 export default Vue.extend({
-  name: 'FilmHeaderBar',
+  name: 'FilmNavBar',
   props: {
     title: {
       type: String,
@@ -46,7 +46,7 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-  .header-bar-main{
+  .nav-bar-main{
     left: 0;
     top:0;
     width:100vw;

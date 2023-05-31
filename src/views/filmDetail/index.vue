@@ -1,6 +1,6 @@
 <template>
   <div v-if="film" class="main">
-    <film-header-bar :title="film.name"/>
+    <film-nav-bar :title="film.name"/>
     <img :src="film.poster" class="poster"/>
     <film-information :film="film"/>
     <film-actor :actors="film.actors"/>
@@ -14,7 +14,7 @@ import { FilmDetailData } from '@/features/film'
 import { filmApi } from '@/services/api'
 import Vue from 'vue'
 import FilmActor from './components/FilmActor.vue'
-import FilmHeaderBar from './components/FilmHeaderBar.vue'
+import FilmNavBar from './components/FilmNavBar.vue'
 import FilmInformation from './components/FilmInformation.vue'
 import FilmPhoto from './components/FilmPhoto.vue'
 export default Vue.extend({
@@ -23,7 +23,7 @@ export default Vue.extend({
     FilmActor,
     FilmInformation,
     FilmPhoto,
-    FilmHeaderBar
+    FilmNavBar
   },
   data ():FilmDetailData {
     return {
