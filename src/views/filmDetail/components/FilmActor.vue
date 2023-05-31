@@ -1,7 +1,7 @@
 <template>
   <div class="actor">
-    <span class="actors-title-text">演职人员</span>
-    <film-detail-swiper style="margin-top: 12px;">
+    <span class="actor-title-text">演职人员</span>
+    <film-detail-swiper style="margin-top: 12px;" name="actor-swiper" :prevView="4">
       <swiper-item v-for="actor in actors" :key="actor">
         <img :src="actor.avatarAddress" class="avatarAddress"/>
         <div class="actor-name">{{ actor.name }}</div>
@@ -31,7 +31,7 @@ export default Vue.extend({
   background: #fff;
   padding: 15px;
   margin-top: 12px;
-  .actors-title-text {
+  .actor-title-text {
     font-size: 16px;
     color: #191a1b;
   }

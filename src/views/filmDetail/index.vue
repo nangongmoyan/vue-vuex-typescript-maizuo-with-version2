@@ -8,6 +8,7 @@
     <!-- <div class="film-content"> -->
       <film-information :film="film"/>
       <film-actor :actors="film.actors"/>
+      <film-photo :photos="film.photos"/>
       <div class="toBuyTicket">选座购票</div>
     <!-- </div> -->
 
@@ -20,11 +21,13 @@ import { filmApi } from '@/services/api'
 import Vue from 'vue'
 import FilmActor from './components/FilmActor.vue'
 import FilmInformation from './components/FilmInformation.vue'
+import FilmPhoto from './components/FilmPhoto.vue'
 export default Vue.extend({
   name: 'FilmDetail',
   components: {
     FilmActor,
-    FilmInformation
+    FilmInformation,
+    FilmPhoto
   },
   data ():FilmDetailData {
     return {

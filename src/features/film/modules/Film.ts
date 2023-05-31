@@ -46,6 +46,7 @@ export interface FilmItem {
   item: Item;
   isPresale: boolean;
   isSale: boolean;
+  photos: string[]
 }
 
 export interface FilmDetailData {
