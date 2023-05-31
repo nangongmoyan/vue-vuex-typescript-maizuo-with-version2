@@ -1,11 +1,22 @@
 import { clientRequest } from '../../request'
-import { FilmDetailResponse, FilmListResponse } from './type'
+import { FilmBannerResponse, FilmDetailResponse, FilmListResponse } from './type'
 
 /**
  * 电影相关接口
  */
 export const filmApi = {
-  // https://m.maizuo.com/gateway?filmId=6328&k=9800898
+
+  /**
+   * 电影banner
+   * @returns
+   */
+  filmBanner: function ():Promise<FilmBannerResponse> {
+    return clientRequest.get('/gateway?cityId=440300&k=5073899', {
+      headers: {
+        'X-Host': 'mall.cfg.film-float.banner'
+      }
+    })
+  },
 
   /**
    * 正在热映电影列表

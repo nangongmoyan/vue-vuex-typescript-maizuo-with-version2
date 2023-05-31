@@ -2,11 +2,11 @@
   <div class="actor">
     <span class="actors-title-text">演职人员</span>
     <film-detail-swiper style="margin-top: 12px;">
-      <film-actor-item v-for="actor in actors" :key="actor">
+      <swiper-item v-for="actor in actors" :key="actor">
         <img :src="actor.avatarAddress" class="avatarAddress"/>
         <div class="actor-name">{{ actor.name }}</div>
         <div class="actor-role">{{ actor.role }}</div>
-      </film-actor-item>
+      </swiper-item>
     </film-detail-swiper>
   </div>
 </template>
@@ -14,7 +14,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import FilmDetailSwiper from './FilmDetailSwiper.vue'
-import FilmActorItem from './FilmActorItem.vue'
+import SwiperItem from '@/components/SwiperItem/index.vue'
 export default Vue.extend({
   name: 'FilmActor',
   props: {
@@ -22,7 +22,7 @@ export default Vue.extend({
       type: Array
     }
   },
-  components: { FilmDetailSwiper, FilmActorItem }
+  components: { FilmDetailSwiper, SwiperItem }
 })
 </script>
 

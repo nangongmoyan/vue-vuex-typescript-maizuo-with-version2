@@ -57,8 +57,27 @@ export interface FilmList {
   total:number
 }
 
+export interface FilmBanner {
+  bannerId: number;
+  actionType: number;
+  actionData: string;
+  imgUrl: string;
+  masterTitle: string;
+  slaveTitle: string;
+  displayOrder: number;
+  bindBusinessId: string;
+  cityIds: string;
+  name: string;
+  displayTimes: number;
+  slaveImgUrl: string;
+  startTime: string;
+  endTime: string;
+  businessId: string;
+}
+
 export interface FilmData {
   films:FilmItem[]
   filmType:string
   page:number
+  banner: FilmBanner | null
 }
