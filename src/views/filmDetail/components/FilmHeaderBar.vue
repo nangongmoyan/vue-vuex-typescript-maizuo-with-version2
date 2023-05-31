@@ -1,5 +1,5 @@
 <template>
-  <div class="header-bar-main" :style="isDownScroll?{background:'white'}:{background : 'transparent'}">
+  <div class="header-bar-main" :style="isDownScroll?{background:'white', 'border-bottom': '0.5px solid #d2d6dc'}:{background : 'transparent'}">
     <div class="goBack" @click="goBack">
       <img src="@/assets/img/film-detail-back.png" alt="back">
     </div>
