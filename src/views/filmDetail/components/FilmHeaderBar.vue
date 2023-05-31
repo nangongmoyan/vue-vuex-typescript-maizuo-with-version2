@@ -1,45 +1,45 @@
 <template>
-  <div class="header-bar-main" v-scroll="50">
+  <div class="header-bar-main" :style="isDownScroll?{background:'white'}:{background : 'transparent'}">
     <div class="goBack" @click="goBack">
       <img src="@/assets/img/film-detail-back.png" alt="back">
     </div>
-    <span class="title">{{title}}</span>
+    <span v-if="isDownScroll" class="title">{{title}}</span>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 
-Vue.directive('scroll', {
-  inserted (el, binding) {
-    el.style.background = 'transparent'
-
-    el.lastChild && (el.lastChild.style.display = 'none')
-    window.onscroll = () => {
-      if ((document.documentElement.scrollTop || document.body.scrollTop) > binding.value) {
-        el.style.background = 'white'
-        el.lastChild && (el.lastChild.style.display = '')
-      } else {
-        el.style.background = 'transparent'
-        el.lastChild && (el.lastChild.style.display = 'none')
-      }
-    }
-  },
-  unbind () {
-    window.onscroll = null
-  }
-})
 export default Vue.extend({
   name: 'FilmHeaderBar',
   props: {
     title: {
       type: String,
       default: ''
+    },
+    scrollValue: {
+      type: Number,
+      default: 50
     }
+  },
+  data () {
+    return {
+      isDownScroll: false
+    }
+  },
+  mounted () {
+    window.onscroll = this.hanleScroll
   },
   methods: {
     goBack () {
       this.$router.back()
+    },
+    hanleScroll () {
+      if ((document.documentElement.scrollTop || document.body.scrollTop) >= this.scrollValue) {
+        this.isDownScroll = true
+      } else {
+        this.isDownScroll = false
+      }
     }
   }
 })
