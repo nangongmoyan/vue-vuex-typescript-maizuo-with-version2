@@ -6,14 +6,17 @@
     <div class="film-info">
       <div class="film-name">
         <span class="name">{{ film.name }}</span>
-        <span class="filmType">{{ film.filmType.name }}</span>
+        <span class="film-type">{{ film.filmType.name }}</span>
       </div>
       <div class="film-grade" v-if="film.grade">
         <span class="grade-label">观众评分：</span>
         <span class="grade">{{ film.grade }}</span>
       </div>
-      <div class="film-actors">主演：{{ film.actors | actorsFilter }}</div>
+      <div class="film-actors">主演：{{ film.actors | actorFilter }}</div>
       <div class="film-nation-runtime">{{ film.nation }} | {{ film.runtime }}分钟</div>
+    </div>
+    <div class="film-buy-tickets">
+      <span class="film-buy-tickets-text">购票</span>
     </div>
   </li>
 </template>
@@ -22,16 +25,11 @@
 import Vue from 'vue'
 
 export default Vue.extend({
-  name: 'NowPlayingItem',
+  name: 'FilmItem',
   props: {
     film: {
       type: Object,
       required: true
-    }
-  },
-  filters: {
-    actorsFilter: (actors:any[]) => {
-      return actors.map(actor => actor.name).join(' ')
     }
   },
   methods: {
@@ -48,9 +46,10 @@ export default Vue.extend({
 <style lang="scss" scoped>
 
 li {
-  width:100%;
   display: flex;
   padding: 15px;
+  align-items: center;
+  border-bottom: 0.5px solid #d2d6dc;
   .film-img{
     width:4.125rem;
     height:5.875rem;
@@ -63,6 +62,7 @@ li {
   }
   .film-info {
     width: calc(100% - 10rem);
+    height:5.875rem;
     padding:0 10px;
     .film-name {
       margin-top: 4px;
@@ -79,7 +79,7 @@ li {
         white-space: nowrap;
 
       }
-      .filmType {
+      .film-type {
         font-size: 9px;
         background-color: #d2d6dc;
         height: 14px;
@@ -115,6 +115,19 @@ li {
       margin-top: 4px;
       color: #797d82;
     }
+
   }
+
+  .film-buy-tickets {
+    height: 25px;
+    border: 1px solid #ff5f16;
+    border-radius: 2px;
+    padding: 0 7.5px;
+      .film-buy-tickets-text {
+        font-size: 13px;
+        color: #ff5f16;
+        line-height: 25px;
+      }
+    }
 }
 </style>

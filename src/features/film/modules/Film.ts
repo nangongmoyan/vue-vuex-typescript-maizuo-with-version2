@@ -49,5 +49,16 @@ export interface FilmItem {
 }
 
 export interface FilmDetailData {
-  film:FilmItem
+  film:FilmItem | null
+}
+
+export interface FilmList {
+  films: FilmItem[]
+  total:number
+}
+
+export interface FilmData {
+  films:FilmItem[]
+  filmType:string
+  page:number
 }

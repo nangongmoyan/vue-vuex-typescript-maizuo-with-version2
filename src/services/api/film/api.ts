@@ -1,5 +1,5 @@
 import { clientRequest } from '../../request'
-import { FilmDetailResponse, NowPalyingFilmsResponse } from './type'
+import { FilmDetailResponse, FilmListResponse } from './type'
 
 /**
  * 电影相关接口
@@ -11,8 +11,14 @@ export const filmApi = {
    * 正在热映电影列表
    * @returns
    */
-  nowPalyingFilms: function ():Promise<NowPalyingFilmsResponse> {
-    return clientRequest.get('/gateway?cityId=440300&pageNum=1&pageSize=10&type=1&k=8089533', {
+  filmList: function ({ pageNum = 1, type = '1' }):Promise<FilmListResponse> {
+    return clientRequest.get('/gateway?cityId=440300', {
+      params: {
+        type,
+        pageNum,
+        k: 8089533,
+        pageSize: 10
+      },
       headers: {
         'X-Host': 'mall.film-ticket.film.list'
       }
@@ -24,7 +30,7 @@ export const filmApi = {
    * @param filmId
    * @returns
    */
-  detail: function (filmId:string) :Promise<FilmDetailResponse> {
+  filmInfo: function (filmId:string) :Promise<FilmDetailResponse> {
     return clientRequest.get(`gateway?filmId=${filmId}&k=9800898`, {
       headers: {
         'X-Host': 'mall.film-ticket.film.info'

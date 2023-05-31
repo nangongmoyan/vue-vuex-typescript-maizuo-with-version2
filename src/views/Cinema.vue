@@ -1,18 +1,14 @@
 <template>
   <div>
-    <films-header/>
-    <router-view/>
+    影院
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import FilmsHeader from './components/FilmsHeader.vue'
+
 export default Vue.extend({
-  name: 'FilmsIndex',
-  components: {
-    FilmsHeader
-  }
+  name: 'CinemaBar'
 })
 
 </script>

@@ -1,18 +1,14 @@
 <template>
-  <div>
-    我的
-  </div>
+  <div>登录</div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-
 export default Vue.extend({
-  name: 'CenterIndex'
+  name: 'LoginPage'
 })
-
 </script>
 
-<style lang="scss" scoped>
+<style>
 
 </style>

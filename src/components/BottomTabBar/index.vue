@@ -1,14 +1,12 @@
 <template>
-  <footer>
     <ul>
       <router-link v-for="tabBar in tabBars" :key="tabBar.to" :to="tabBar.to" custom v-slot="{navigate, isActive}">
         <li @click="navigate" :class="isActive?'bottomActive':''">
-          <img class="tabBarImg" :src="isActive?tabBar.active:tabBar.inActive" :alt="tabBar.to"/>
+          <i :class='tabBar.class'></i>
           <span class="tabBarName">{{ tabBar.name }}</span>
         </li>
       </router-link>
     </ul>
-  </footer>
 </template>
 
 <script lang="ts">
@@ -26,25 +24,41 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-  footer {
-    position: fixed;
+
+    ul{
+      position: fixed;
     bottom: 0;
-    left: 0;
     width: 100%;
-    height:3.125rem;
-    background: white;
-    ul {
-      display: flex;
-      li {
-        flex:1;
-        line-height: 1.5625rem;
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    padding: 0;
+    margin: 0;
+    z-index: 100;
+    background: #fff;
+    list-style: none;
+      li{
+          flex:1;
+          line-height: 1.5625rem;
+          text-align: center;
+          display: flex;
+          align-items: center;
+          flex-direction: column;
+        i {
+          font-size: 20px;
+        }
+        // span {
+        //   position: absolute;
+        //   font-size: 10px;
+        //   line-height: 12px;
+        //   color: #797d82;
+        //   top: 38px;
+        //   left: 50%;
+        //   transform: translateX(-50%);
+        // }
       }
-    }
   }
+
   .tabBarImg {
     width:1.5625rem;
     height: 1.5625rem

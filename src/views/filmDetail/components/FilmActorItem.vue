@@ -1,6 +1,6 @@
 <template>
-  <div>
-    影院
+  <div class="swiper-slide">
+    <slot/>
   </div>
 </template>
 
@@ -8,9 +8,8 @@
 import Vue from 'vue'
 
 export default Vue.extend({
-  name: 'CinemasIndex'
+  name: 'FilmActorItem'
 })
-
 </script>
 
 <style lang="scss" scoped>

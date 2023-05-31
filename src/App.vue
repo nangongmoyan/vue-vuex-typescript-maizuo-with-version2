@@ -1,7 +1,9 @@
 <template>
   <div>
     <bottom-tab-bar/>
-    <router-view/>
+    <section>
+      <router-view/>
+    </section>
   </div>
 </template>
 
@@ -21,12 +23,15 @@ export default Vue.extend({
   padding: 0;
 }
 
-html, body {
-  height: 100%
-}
+// html {
+//   height: 100%
+// }
 
 ul {
   list-style: none;
+}
+section{
+  padding-bottom: 3.125rem;
 }
 
 </style>

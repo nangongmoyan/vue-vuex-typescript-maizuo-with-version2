@@ -1,10 +1,11 @@
 import { MaiZuoResponse } from '../../type'
-import { FilmDetailData } from '../../../features/film'
-import { NowPalyingFilms } from '../../../features/nowPlaying'
+import { FilmItem, FilmList } from '../../../features/film'
 
-export interface NowPalyingFilmsResponse extends MaiZuoResponse {
-  data: NowPalyingFilms;
+export interface FilmListResponse extends MaiZuoResponse {
+  data: FilmList;
 }
 export interface FilmDetailResponse extends MaiZuoResponse {
-  data: FilmDetailData;
+  data: {
+    film:FilmItem
+  };
 }

@@ -1,10 +1,10 @@
 export const topTabBar = [
   {
-    to: '/films/nowPlaying',
+    to: '/films/filmList/1',
     name: '正在热映'
   },
   {
-    to: '/films/comingSoon',
+    to: '/films/filmList/2',
     name: '即将上映'
   }
 ]

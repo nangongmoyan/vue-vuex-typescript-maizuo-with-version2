@@ -1,5 +1,5 @@
 <template>
-  <footer>
+  <div>
     <ul>
       <router-link v-for="tabBar in tabBars" :key="tabBar.to" :to="tabBar.to" custom v-slot="{navigate, isActive}">
         <li @click="navigate" >
@@ -7,7 +7,8 @@
         </li>
       </router-link>
     </ul>
-  </footer>
+  </div>
+
 </template>
 
 <script lang="ts">
@@ -15,7 +16,7 @@ import Vue from 'vue'
 import { topTabBar } from './const'
 
 export default Vue.extend({
-  name: 'FilmsHeader',
+  name: 'FilmHeader',
   data () {
     return {
       tabBars: topTabBar
@@ -25,15 +26,26 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
+div{
+  width: 100%;
+  height: 3.125rem;
+  background: #fff;
+  z-index: 1000;
   ul {
+    height: 100%;
     display: flex;
-    height: 3.125rem;
-    line-height: 3.125rem;
+    align-items: center;
+    justify-content: space-between;
     li {
-      flex:1;
-      text-align: center;
+      height: 100%;
+      margin: 0 60px;
+      font-size: 14px;
+      line-height:3.125rem;
+      box-sizing: border-box;
     }
   }
+}
+
   .topActive {
     color:#ff5f16;
     border-bottom: 2px solid #ff5f16;
