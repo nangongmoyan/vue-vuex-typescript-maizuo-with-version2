@@ -2,7 +2,7 @@
   <div >
     <navigation-bar/>
     <div class="login-main">
-      <img  class='logo' src="https://assets.maizuo.com/h5/mz-auth/public/app/img/logo.19ca0be.png"/>
+      <img  class='logo' src="@/assets/logo.png"/>
       <div class="logo-label">墨言电影</div>
       <van-form  class="login-form">
         <van-cell-group inset>
@@ -22,7 +22,6 @@
             maxlength="6"
             label="短信验证码"
             v-model="smsCode"
-            @click="sendSms"
             placeholder="请输入短信验证码"
           >
             <template #button>
@@ -30,7 +29,8 @@
                 size="small"
                 type="primary"
                 color ='#F03D37'
-                :disabled="getSmsBtnDisable">
+                @click="sendSms"
+                :disabled="!smsAbled">
                   {{ smsBtnText }}
               </van-button>
             </template>
@@ -71,18 +71,18 @@ export default Vue.extend({
     }
   },
   computed: {
+    smsAbled ():boolean {
+      return /^1[3456789]\d{9}$/.test(this.mobile) && !this.getSmsBtnDisable
+    },
     loginAbled ():boolean {
-      return /^1[3456789]\d{9}$/.test(this.mobile) && !this.logining
+      return /^1[3456789]\d{9}$/.test(this.mobile) && this.smsCode !== '' && !this.logining
     }
   },
   methods: {
-    onClickLeft () {
-      console.log('onClickLeft')
-    },
     async sendSms () {
       try {
         authApi.sendSmsCode(this.mobile)
-        this.waitTime--
+        // this.waitTime--
         this.getSmsBtnDisable = true
         const timer = setInterval(() => {
           if (this.waitTime > 1) {
@@ -104,9 +104,7 @@ export default Vue.extend({
         this.logining = true
         const { data } = await authApi.loginBySms(this.mobile, this.smsCode)
         this.$store.commit('setUser', data)
-        setTimeout(() => {
-          this.$router.push((this.$route.query.redirect as string) ?? '/film')
-        }, 2000)
+        this.$router.push((this.$route.query.redirect as string) ?? '/film')
       } catch (error) {
         console.log('LoginPage-onLogin' + error)
       }
@@ -122,18 +120,17 @@ export default Vue.extend({
   padding: 0 15px;
   align-items: center;
   flex-direction: column;
-  padding-top: 10vh;
+  padding-top: 5vh;
   .logo{
-    width: 4.5rem;
-    height: 4.5rem;
+    width: 7.5rem;
+    height: 7.5rem;
   }
   .logo-label{
     font-size: 30px;
-    margin-top: 20px;
   }
   .login-form{
     width:100vw;
-    margin-top: 60px;
+    margin-top: 45px;
     margin-bottom: 60px;
   }
 }
