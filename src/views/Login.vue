@@ -3,7 +3,7 @@
     <navigation-bar/>
     <div class="login-main">
       <img  class='logo' src="https://assets.maizuo.com/h5/mz-auth/public/app/img/logo.19ca0be.png"/>
-      <div class="logo-label">卖座电影</div>
+      <div class="logo-label">墨言电影</div>
       <van-form  class="login-form">
         <van-cell-group inset>
           <van-field
@@ -29,7 +29,7 @@
               <van-button
                 size="small"
                 type="primary"
-                color ='#ff5f16'
+                color ='#F03D37'
                 :disabled="getSmsBtnDisable">
                   {{ smsBtnText }}
               </van-button>
@@ -40,7 +40,7 @@
       <van-button
         block
         type="primary"
-        color ='#ff5f16'
+        color ='#F03D37'
         @click="onLogin"
         loading-text="登录中..."
         :loading="logining"
