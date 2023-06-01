@@ -42,10 +42,12 @@ export default Vue.extend({
 <style lang="scss" scoped>
   .nav-bar-main{
     position: fixed;
+    z-index: 100;
     .nav-bar-first{
       width:100vw;
       display: flex;
       height:2.75rem;
+      background: #fff;
       align-items: center;
       justify-content: center;
       border-bottom: 0.5px solid #f3f4f6;
@@ -80,7 +82,7 @@ export default Vue.extend({
 
       .nav-bar-second{
         display: flex;
-        height:2.75rem;
+        height:3.125rem;
         background: #fff;
         align-items: center;
         justify-content: space-between;

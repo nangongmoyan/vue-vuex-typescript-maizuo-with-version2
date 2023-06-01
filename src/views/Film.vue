@@ -23,9 +23,9 @@ export default Vue.extend({
   mounted () {
     window.onscroll = this.hanleScroll
   },
-  // beforeDestroy () {
-  //   // window.onscroll = ''
-  // },
+  destroyed () {
+    window.onscroll = null
+  },
   methods: {
     hanleScroll () {
       if (document.documentElement.scrollTop >= 200) {

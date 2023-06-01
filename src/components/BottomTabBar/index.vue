@@ -37,6 +37,7 @@ export default Vue.extend({
     z-index: 100;
     background: #fff;
     list-style: none;
+    height:3.125rem;
       li{
           flex:1;
           line-height: 1.5625rem;
