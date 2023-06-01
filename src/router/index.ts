@@ -1,3 +1,4 @@
+import store from '@/store'
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 
@@ -8,11 +9,13 @@ const routes: Array<RouteConfig> = [
     path: '/films',
     name: '',
     component: () => import(/* webpackChunkName: 'films' */ '@/views/Film.vue'),
+    meta: { showTab: true },
     children: [
       {
         path: '/films/filmList/:type',
         name: 'FilmList',
-        component: () => import(/* webpackChunkName: 'ComingSoon' */ '@/views/film/FilmList.vue')
+        component: () => import(/* webpackChunkName: 'ComingSoon' */ '@/views/film/FilmList.vue'),
+        meta: { showTab: true }
       },
       {
         path: '/films',
@@ -28,12 +31,14 @@ const routes: Array<RouteConfig> = [
   {
     path: '/cinemas',
     name: '',
-    component: () => import(/* webpackChunkName: 'cinemas' */ '@/views/Cinema.vue')
+    component: () => import(/* webpackChunkName: 'cinemas' */ '@/views/Cinema.vue'),
+    meta: { showTab: true }
   },
   {
     path: '/center',
     name: '',
-    component: () => import(/* webpackChunkName: 'center' */ '@/views/Center.vue')
+    component: () => import(/* webpackChunkName: 'center' */ '@/views/Center.vue'),
+    meta: { requiresAuth: true, showTab: true }
   },
   {
     path: '/login',
@@ -58,4 +63,20 @@ const router = new VueRouter({
   routes
 })
 
+router.beforeEach(async (to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (!store.state.user) {
+      router.push({
+        path: '/login',
+        query: {
+          redirect: to.fullPath
+        }
+      })
+    } else {
+      next()
+    }
+  } else {
+    next()
+  }
+})
 export default router

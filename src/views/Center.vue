@@ -1,10 +1,10 @@
 <template>
   <div class="mz-center">
-    <div class="main">
+    <div class="main" v-if="userInfo">
       <router-link to="/login">
           <div class="center-header">
-            <img  class='avatar' src="@/assets/img/avatar.png" alt="avatar">
-            <span class="login-text">立即登录</span>
+            <img  class='avatar' :src="userInfo.headIcon" alt="avatar">
+            <span class="login-text">{{ userInfo.nickName }}</span>
           </div>
         </router-link>
 
@@ -43,10 +43,30 @@
 </template>
 
 <script lang="ts">
+import { CenterData } from '@/features/center'
+import { userApi } from '@/services/api'
 import Vue from 'vue'
 
 export default Vue.extend({
-  name: 'CenterBar'
+  name: 'CenterBar',
+  data () :CenterData {
+    return {
+      userInfo: null
+    }
+  },
+  created () {
+    this.loadUserInfo()
+  },
+  methods: {
+    async loadUserInfo () {
+      try {
+        const { data } = await userApi.getUserInfo()
+        this.userInfo = data
+      } catch (error) {
+        console.log('CenterBar-loadUserInfo' + error)
+      }
+    }
+  }
 })
 
 </script>
@@ -62,10 +82,10 @@ export default Vue.extend({
   .center-header{
     text-align: center;
     margin-top: -2.75rem;
-    height: 12.5rem;
+    height: 15rem;
     padding-left: 1.375rem;
     padding-top: 4rem;
-    background: url(https://assets.maizuo.com/h5/v5/public/app/img/bg.6837f67.png);
+    background: url(https://obj.pipi.cn/festatic/asgard/resources/images/dpmmweb/mycenter/bg.png);
     background-size: cover;
     display: flex;
     -webkit-box-align: center;

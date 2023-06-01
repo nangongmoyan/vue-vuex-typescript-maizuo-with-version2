@@ -65,7 +65,7 @@ export default Vue.extend({
     text-align: center;
     .price-fmt {
       font-size: 15px;
-      color: #ff5f16;
+      color: #F03D37;
       height: 0!important;
       display: inline-table!important;
       .upon {

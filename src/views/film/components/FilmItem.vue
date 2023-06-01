@@ -15,7 +15,7 @@
       <div class="film-actors">主演：{{ film.actors | actorFilter }}</div>
       <div class="film-nation-runtime">{{ film.nation }} | {{ film.runtime }}分钟</div>
     </div>
-    <div class="film-buy-tickets" :style="canBuyNow?{background: '#ff5f16'}:{background: '#ffb232'}" @click.stop="toBuyTickets">
+    <div class="film-buy-tickets" :style="canBuyNow?{background: '#F03D37'}:{background: '#ffb232'}" @click.stop="toBuyTickets">
       <span class="film-buy-tickets-text">{{canBuyNow?'购票':'预购'}}</span>
     </div>
   </li>

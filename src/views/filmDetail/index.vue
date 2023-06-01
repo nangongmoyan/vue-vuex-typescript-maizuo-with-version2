@@ -1,5 +1,5 @@
 <template>
-  <div v-if="film" class="main">
+  <div v-if="film" class="main top-page">
     <film-nav-bar :title="film.name"/>
     <img :src="film.poster" class="poster"/>
     <film-information :film="film"/>
@@ -66,7 +66,7 @@ export default Vue.extend({
     right: 0;
     height: 3.0625rem;
     text-align: center;
-    background-color: #ff5f16;
+    background-color: #F03D37;
     color: #fff;
     font-size: 16px;
     line-height: 49px;

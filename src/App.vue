@@ -1,9 +1,9 @@
 <template>
   <div>
-    <bottom-tab-bar/>
     <section>
       <router-view/>
     </section>
+    <bottom-tab-bar/>
   </div>
 </template>
 
