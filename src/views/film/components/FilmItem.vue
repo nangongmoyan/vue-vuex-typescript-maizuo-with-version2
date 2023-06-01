@@ -15,8 +15,8 @@
       <div class="film-actors">主演：{{ film.actors | actorFilter }}</div>
       <div class="film-nation-runtime">{{ film.nation }} | {{ film.runtime }}分钟</div>
     </div>
-    <div class="film-buy-tickets">
-      <span class="film-buy-tickets-text">购票</span>
+    <div class="film-buy-tickets" :style="canBuyNow?{background: '#ff5f16'}:{background: '#ffb232'}" @click.stop="toBuyTickets">
+      <span class="film-buy-tickets-text">{{canBuyNow?'购票':'预购'}}</span>
     </div>
   </li>
 </template>
@@ -30,6 +30,15 @@ export default Vue.extend({
     film: {
       type: Object,
       required: true
+    },
+    filmType: {
+      type: String,
+      default: '1'
+    }
+  },
+  computed: {
+    canBuyNow () :boolean {
+      return this.filmType === '1'
     }
   },
   methods: {
@@ -38,6 +47,9 @@ export default Vue.extend({
         name: 'FilmDetail',
         params: { filmId }
       })
+    },
+    toBuyTickets () {
+      console.log('toBuyTickets')
     }
   }
 })
@@ -61,7 +73,7 @@ li {
     }
   }
   .film-info {
-    width: calc(100% - 10rem);
+    width: calc(100% - 8rem);
     height:5.875rem;
     padding:0 10px;
     .film-name {
@@ -119,13 +131,12 @@ li {
   }
 
   .film-buy-tickets {
-    height: 25px;
-    border: 1px solid #ff5f16;
-    border-radius: 2px;
-    padding: 0 7.5px;
+    height:25px;
+    padding: 0 8.5px;
+    border-radius: 12.5px;
       .film-buy-tickets-text {
-        font-size: 13px;
-        color: #ff5f16;
+        color:#fff;
+        font-size: 12px;
         line-height: 25px;
       }
     }

@@ -78,7 +78,6 @@ export interface FilmBanner {
 
 export interface FilmData {
   films:FilmItem[]
-  filmType:string
   page:number
   banner: FilmBanner | null
 }

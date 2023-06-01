@@ -2,7 +2,7 @@
   <div>
     <film-banner :banner="banner"/>
     <ul >
-      <film-item v-for="film in films" :key="film.filmId" :film="film"/>
+      <film-item v-for="film in films" :key="film.filmId" :film="film" :filmType="$route.params.type"/>
     </ul>
   </div>
 </template>
@@ -23,8 +23,7 @@ export default Vue.extend({
     return {
       page: 1,
       films: [],
-      banner: null,
-      filmType: '1'
+      banner: null
     }
   },
   created () {
