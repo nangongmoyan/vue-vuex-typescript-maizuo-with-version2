@@ -4,8 +4,8 @@
       <span class="photo-title-text">剧照</span>
     </div>
     <film-detail-swiper style="margin-top: 12px;" name="photo-swiper" :prevView="2.3">
-      <swiper-item v-for="photo in photos" :key="photo">
-        <img :src="photo" class="photo-img" />
+      <swiper-item v-for="(photo, index) in photos" :key="photo">
+        <img :src="photo" class="photo-img" @click="onPreview(index)" />
       </swiper-item>
     </film-detail-swiper>
   </div>
@@ -13,6 +13,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import { ImagePreview } from 'vant'
 import FilmDetailSwiper from './FilmDetailSwiper.vue'
 import SwiperItem from '@/components/SwiperItem/index.vue'
 export default Vue.extend({
@@ -22,7 +23,16 @@ export default Vue.extend({
       type: Array
     }
   },
-  components: { FilmDetailSwiper, SwiperItem }
+  components: { FilmDetailSwiper, SwiperItem },
+  methods: {
+    onPreview (startPosition:number) {
+      ImagePreview({
+        startPosition,
+        closeable: true,
+        images: (this.photos as string[])
+      })
+    }
+  }
 })
 </script>
 
