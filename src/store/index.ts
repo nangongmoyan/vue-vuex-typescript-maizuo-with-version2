@@ -1,3 +1,4 @@
+import { SubCityItem } from '@/features/city'
 import Vue from 'vue'
 import Vuex from 'vuex'
 
@@ -5,8 +6,12 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+
     user: JSON.parse(window.localStorage.getItem('user') || 'null'),
-    city: JSON.parse(window.localStorage.getItem('city') || 'null')
+    city: JSON.parse(window.localStorage.getItem('city') || 'null'),
+    currentCity: JSON.parse(window.localStorage.getItem('currentCity') || 'null')
+
+    // cityId: localStorage.getItem('cityId') ? Number(localStorage.getItem('cityId')) : ''
   },
   getters: {
   },
@@ -22,6 +27,12 @@ export default new Vuex.Store({
     setCity (state, payload) {
       state.city = payload
       window.localStorage.setItem('city', JSON.stringify(payload))
+    },
+    setCurrentCity (state, payload) {
+      const currentCity = (state.city.origiCitys as SubCityItem[]).find(item => item.cityId === payload)
+      state.currentCity = currentCity
+      console.log({ currentCity })
+      window.localStorage.setItem('currentCity', JSON.stringify(currentCity))
     }
   },
   actions: {

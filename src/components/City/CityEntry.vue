@@ -1,22 +1,37 @@
 <template>
-  <div class="city-entry">
-    <span class="city-name">深圳</span>
+  <div class="city-entry" v-if="currentCity">
+    <span class="city-name">{{ currentCity.name }}</span>
     <van-icon name="arrow-down" size="10" color="#F03D37" />
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
+import { mapState } from 'vuex'
 
 export default Vue.extend({
-  name: 'CityEntry'
+  name: 'CityEntry',
+  computed: {
+    ...mapState(['currentCity'])
+  }
+
 })
 </script>
 
 <style lang="scss" scoped>
-.city-name{
+.city-entry{
+  display: flex;
+  align-items: center;
+
+  .city-name{
+  max-width: 3.5rem;
   font-size: 13px;
   color: #F03D37;
   margin-right: 2.5px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
+}
+
 </style>

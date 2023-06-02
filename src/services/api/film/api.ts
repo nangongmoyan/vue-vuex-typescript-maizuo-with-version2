@@ -1,3 +1,4 @@
+import store from '@/store'
 import { clientRequest } from '../../request'
 import { FilmBannerResponse, FilmDetailResponse, FilmListResponse } from './type'
 
@@ -11,7 +12,11 @@ export const filmApi = {
    * @returns
    */
   filmBanner: function ():Promise<FilmBannerResponse> {
-    return clientRequest.get('/gateway?cityId=440300&k=5073899', {
+    return clientRequest.get('/gateway', {
+      params: {
+        k: 8089533,
+        cityId: store.state.currentCity.cityId
+      },
       headers: {
         'X-Host': 'mall.cfg.film-float.banner'
       }
@@ -23,13 +28,13 @@ export const filmApi = {
    * @returns
    */
   filmList: function ({ pageNum = 1, type = '1' }):Promise<FilmListResponse> {
-    return clientRequest.get('/gateway?cityId=440300', {
+    return clientRequest.get('/gateway', {
       params: {
         type,
         pageNum,
         k: 8089533,
-        pageSize: 8
-
+        pageSize: 8,
+        cityId: store.state.currentCity.cityId
       },
       headers: {
         'X-Host': 'mall.film-ticket.film.list'

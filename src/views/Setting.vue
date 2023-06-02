@@ -1,7 +1,7 @@
 <template>
     <div class="my-main" v-if="user">
-      <navigation-bar title="设置">
-        </navigation-bar>
+      <navigation-bar title="设置"/>
+
       <van-cell title="账号ID" :value="user.userId" style="margin-top: 10px;" />
       <van-cell title="登录密码" value="修改" is-link style="margin-top: 10px;"/>
       <van-cell title="安全密码" value="未设置" is-link/>
