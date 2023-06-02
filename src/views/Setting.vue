@@ -1,12 +1,13 @@
 <template>
     <div class="my-main" v-if="user">
-      <navigation-bar title="设置"/>
+      <navigation-bar title="设置">
+        </navigation-bar>
       <van-cell title="账号ID" :value="user.userId" style="margin-top: 10px;" />
       <van-cell title="登录密码" value="修改" is-link style="margin-top: 10px;"/>
       <van-cell title="安全密码" value="未设置" is-link/>
       <van-cell title="手机号码" :value="user.nickName" is-link style="margin-top: 10px;"/>
       <van-cell title="软件版本" is-link />
-      <van-cell title="隐私协议" is-link />
+      <van-cell title="隐私协议" is-link to="https://m.maizuo.com/mz-auth/#/user/privacy-policy"/>
       <van-cell title="用户协议" is-link />
       <van-cell title="意见反馈" is-link />
       <van-cell title="清除缓存" value="修改" style="margin-top: 10px;"/>

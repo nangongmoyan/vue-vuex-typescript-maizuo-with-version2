@@ -1,12 +1,16 @@
 <template>
-  <div>
-    <ul>
-      <router-link v-for="tabBar in tabBars" :key="tabBar.to" :to="tabBar.to" custom v-slot="{navigate, isActive}">
-        <li @click="navigate" >
-          <span :class="isActive?'topActive':''">{{ tabBar.name }}</span>
-        </li>
-      </router-link>
-    </ul>
+  <div class="film-header">
+    <city-entry/>
+    <van-tabs v-model="active" animated style="flex:1"      title-active-color="#F03D37">
+      <van-tab
+      v-for="tab in tabs"
+      :key="tab.path"
+      :title="tab.title"
+      :to="tab.path"
+
+      />
+    </van-tabs>
+    <search-icon/>
   </div>
 
 </template>
@@ -14,40 +18,47 @@
 <script lang="ts">
 import Vue from 'vue'
 import { topTabBar } from './const'
-
+import CityEntry from '@/components/City/CityEntry.vue'
+import SearchIcon from '@/components/Search/SearchIcon.vue'
 export default Vue.extend({
   name: 'FilmHeader',
+  components: {
+    CityEntry,
+    SearchIcon
+  },
   data () {
     return {
-      tabBars: topTabBar
+      active: 0,
+      tabs: [
+        {
+          title: '正在热映',
+          path: '/films/filmList/1'
+        },
+        {
+          title: '即将上映',
+          path: '/films/filmList/2'
+        }
+      ]
+    }
+  },
+  methods: {
+    onClickTab (item:any) {
+      console.log('onClickTab', item)
     }
   }
 })
 </script>
 
 <style lang="scss" scoped>
-div{
-  width: 100%;
-  height: 3.125rem;
+.film-header{
+  height:46px;
+  display: flex;
+  padding: 0 15px;
   background: #fff;
-  z-index: 1000;
-  ul {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    li {
-      height: 100%;
-      margin: 0 60px;
-      font-size: 14px;
-      line-height:3.125rem;
-      box-sizing: border-box;
-    }
+  align-items: center;
+  z-index: 10;
+  .film-tabs{
+    background: red;
   }
 }
-
-  .topActive {
-    color:#ff5f16;
-    border-bottom: 2px solid #ff5f16;
-  }
 </style>
