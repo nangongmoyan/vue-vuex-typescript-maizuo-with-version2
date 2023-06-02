@@ -28,7 +28,8 @@ export const filmApi = {
         type,
         pageNum,
         k: 8089533,
-        pageSize: 10
+        pageSize: 8
+
       },
       headers: {
         'X-Host': 'mall.film-ticket.film.list'

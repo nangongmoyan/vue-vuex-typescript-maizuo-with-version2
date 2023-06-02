@@ -1,9 +1,15 @@
 <template>
-  <div>
+  <div style="padding-bottom: 50px;">
     <film-banner :banner="banner"/>
-    <ul >
+    <van-list
+      v-model="loading"
+      @load="onLoadMore"
+      :finished="finished"
+      :immediate-check="false"
+      finished-text="- THE END -"
+    >
       <film-item v-for="film in films" :key="film.filmId" :film="film" :filmType="$route.params.type"/>
-    </ul>
+    </van-list>
   </div>
 </template>
 
@@ -21,21 +27,30 @@ export default Vue.extend({
   },
   data () :FilmData {
     return {
-      page: 1,
       films: [],
-      banner: null
+      banner: null,
+      totalPage: 0,
+      currentPage: 1,
+      loading: false,
+      finished: false
     }
   },
   created () {
     this.loadFilmBanner()
-    this.loadFilmList(this.page)
+    this.loadFilmList()
   },
 
   methods: {
-    async loadFilmList (page:number) {
+    async loadFilmList () {
       try {
-        const { data } = await filmApi.filmList({ pageNum: 1, type: this.$route.params.type })
-        this.films = data.films
+        console.log(' this.currentPage', this.currentPage)
+        const { data } = await filmApi.filmList({
+          pageNum: this.currentPage,
+          type: this.$route.params.type
+        })
+        this.films = [...this.films, ...data.films]
+
+        this.currentPage === 1 && (this.totalPage = data.total)
       } catch (error) {
         console.log('FilmList-loadFilmList' + error)
       }
@@ -48,6 +63,18 @@ export default Vue.extend({
       } catch (error) {
         console.log('FilmList-loadFilmBanner' + error)
       }
+    },
+    onLoadMore () {
+      if (this.totalPage !== 0 && this.films.length === this.totalPage) {
+        this.finished = true
+      } else {
+        setTimeout(() => {
+          this.currentPage++
+          this.loadFilmList().then(() => {
+            this.loading = false
+          })
+        }, this.currentPage === 1 ? 750 : 0)
+      }
     }
 
   }
@@ -56,5 +83,4 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-
 </style>

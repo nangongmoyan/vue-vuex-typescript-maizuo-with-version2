@@ -77,7 +77,10 @@ export interface FilmBanner {
 }
 
 export interface FilmData {
+  totalPage:number
   films:FilmItem[]
-  page:number
+  loading: boolean
+  finished: boolean
+  currentPage:number
   banner: FilmBanner | null
 }
