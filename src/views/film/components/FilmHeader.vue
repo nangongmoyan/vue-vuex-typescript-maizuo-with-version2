@@ -1,7 +1,7 @@
 <template>
   <div class="film-header">
     <city-entry/>
-    <van-tabs v-model="active" animated style="flex:1"      title-active-color="#F03D37">
+    <van-tabs v-model="active" animated style="flex:1" title-active-color="#F03D37">
       <van-tab
       v-for="tab in tabs"
       :key="tab.path"
@@ -17,7 +17,6 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { topTabBar } from './const'
 import CityEntry from '@/components/City/CityEntry.vue'
 import SearchIcon from '@/components/Search/SearchIcon.vue'
 export default Vue.extend({
@@ -39,11 +38,6 @@ export default Vue.extend({
           path: '/films/filmList/2'
         }
       ]
-    }
-  },
-  methods: {
-    onClickTab (item:any) {
-      console.log('onClickTab', item)
     }
   }
 })
