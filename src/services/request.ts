@@ -1,6 +1,6 @@
 import store from '@/store'
 import axios from 'axios'
-
+import { Toast } from 'vant'
 const clientRequest = axios.create({
   baseURL: 'https://m.maizuo.com',
   headers: {
@@ -17,6 +17,12 @@ clientRequest.interceptors.request.use(function (config) {
       'X-Token': user.token
     })
   }
+  Toast.loading({
+    message: '玩命加载...',
+    forbidClick: true,
+    loadingType: 'spinner',
+    duration: 0
+  })
   return config
 }, function (error) {
   return Promise.reject(error)
@@ -25,6 +31,11 @@ clientRequest.interceptors.response.use(function (response) {
   /**
    * 状态码为 2xx 都会进入这里
    */
+  Toast.clear()
   return response.data
+}, function (error) {
+  Toast.clear()
+  Toast.fail('加载失败，请稍后重试')
+  return Promise.reject(error)
 })
 export { clientRequest }
