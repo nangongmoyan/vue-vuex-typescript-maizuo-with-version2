@@ -1,8 +1,6 @@
 <template>
   <div>
-    <section>
       <router-view/>
-    </section>
     <bottom-tab-bar/>
   </div>
 </template>

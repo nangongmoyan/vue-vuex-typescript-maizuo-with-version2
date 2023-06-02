@@ -46,6 +46,12 @@ const routes: Array<RouteConfig> = [
     component: () => import(/* webpackChunkName: 'center' */ '@/views/Login.vue')
   },
   {
+    path: '/setting',
+    name: 'Setting',
+    component: () => import(/* webpackChunkName: 'center' */ '@/views/Setting.vue'),
+    meta: { requiresAuth: true }
+  },
+  {
     path: '/city',
     name: 'City',
     component: () => import(/* webpackChunkName: 'center' */ '@/views/City.vue')
