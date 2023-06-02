@@ -1,5 +1,5 @@
-import { clientRequest } from '@/services/request'
 import { LoginResponse } from './type'
+import { clientRequest } from '../../request'
 
 export const authApi = {
 
