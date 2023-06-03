@@ -26,6 +26,7 @@ export interface CinemaItem {
   eTicketFlag: number;
   seatFlag: number;
   ticketTypes: null;
+  distance: number
 }
 
 export interface CinemaList {

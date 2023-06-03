@@ -8,20 +8,22 @@
 <script lang="ts">
 import Vue from 'vue'
 import BottomTabBar from '@/components/BottomTabBar/index.vue'
+import { cityFailure, transformCity } from './utils/city'
+import { getLocation } from './utils/location'
 export default Vue.extend({
   components: {
     BottomTabBar
   },
   created () {
-    navigator.geolocation.getCurrentPosition(position => {
-      console.log({ position })
-    }, error => {
-      console.log({ error })
-    }, {
-      // enableHightAccuracy: false,
-      timeout: 30000,
-      maximumAge: 0
-    })
+    this.moYanFilmInit()
+    getLocation()
+  },
+  methods: {
+    moYanFilmInit () {
+      if (cityFailure()) {
+        transformCity()
+      }
+    }
   }
 })
 </script>

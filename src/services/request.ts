@@ -10,19 +10,28 @@ const clientRequest = axios.create({
 
 // 请求拦截器
 clientRequest.interceptors.request.use(function (config) {
+  if (!config.headers?.['X-Host']) {
+    Object.assign(config, {
+      baseURL: ''
+    })
+  }
   /** 我们就在这里通过改写 config 配置信息来实现业务功能的统一处理 */
   const { user } = store.state
   if (user && user.token) {
     Object.assign(config.headers, {
-      'X-Token': user.token
+      'X-Token': user.token,
+      unToast: config.headers?.unToast
     })
   }
-  Toast.loading({
-    message: '玩命加载...',
-    forbidClick: true,
-    loadingType: 'spinner',
-    duration: 0
-  })
+  if (!config.headers?.unToast) {
+    Toast.loading({
+      message: '玩命加载...',
+      forbidClick: true,
+      loadingType: 'spinner',
+      duration: 0
+    })
+  }
+
   return config
 }, function (error) {
   return Promise.reject(error)

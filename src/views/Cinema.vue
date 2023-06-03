@@ -16,6 +16,7 @@ import Vue from 'vue'
 import CinemaItem from './cinema/components/CinemaItem.vue'
 import CinemaNavBar from './cinema/components/CinemaNavBar.vue'
 import BetterScroll from 'better-scroll'
+import { convertCinemas } from '@/features/cinema/utils/convertCinemas'
 export default Vue.extend({
   components: { CinemaNavBar, CinemaItem },
   name: 'CinemaBar',
@@ -32,7 +33,7 @@ export default Vue.extend({
     async loadCinemaList () {
       try {
         const { data } = await cinemaApi.cinemaList()
-        this.cinemas = data.cinemas
+        this.cinemas = convertCinemas(data.cinemas)
         this.$nextTick(() => {
           new BetterScroll('.cinema-content', {
             scrollbar: { fade: true }

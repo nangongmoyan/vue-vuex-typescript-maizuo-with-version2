@@ -12,8 +12,4 @@ export interface CityItem {
 
 export interface CityData {
   value: string
-  citys: CityItem[]
-  cityIndexs: string[]
-  hotCitys:SubCityItem[]
-  origiCitys:SubCityItem[]
 }

@@ -11,7 +11,7 @@
         <span class="upon"> 起 </span>
       </span>
       <div class="cinema-gpsAddress">
-        <span class="cinema-distance">距离未知</span>
+        <span class="cinema-distance">{{cinema.distance?cinema.distance.toFixed(1)+'km':'距离未知'}}</span>
       </div>
     </div>
   </div>

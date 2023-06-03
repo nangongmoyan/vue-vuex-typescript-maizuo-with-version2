@@ -16,21 +16,21 @@
         <van-col>深圳</van-col>
       </van-row>
       <div class="city-title">热门城市</div>
-      <van-row>
+      <van-row v-if="city?.hotCitys?.length>0">
         <van-col
-          v-for="hotCity in hotCitys"
+          v-for="hotCity in city?.hotCitys"
           :key="hotCity.cityId"
           @click="onSelect(hotCity.cityId)">
           {{ hotCity.name }}
         </van-col>
       </van-row>
     </div>
-    <div>
-      <van-index-bar  :index-list="cityIndexs" :sticky-offset-top="100">
-        <div v-for="city in citys" :key="city.index">
-          <van-index-anchor :index="city.index" />
+    <div v-if="city?.citys?.length>0">
+      <van-index-bar  :index-list="city.cityIndexs" :sticky-offset-top="100">
+        <div v-for="item in city?.citys" :key="item.index">
+          <van-index-anchor :index="item.index" />
           <van-cell
-          v-for="subCity in city.subCitys"
+          v-for="subCity in item.subCitys"
           :key="subCity.cityId"
           :title="subCity.name"
           @click="onSelect(subCity.cityId)"
@@ -42,73 +42,37 @@
 </template>
 
 <script lang="ts">
-import { CityData, CityItem, SubCityItem } from '@/features/city'
-import { cityApi } from '@/services/api'
+import { CityData } from '@/features/city'
 import Vue from 'vue'
-import dayjs from 'dayjs'
-import store from '@/store'
 import NavigationBar from '@/components/NavigationBar/index.vue'
+import { cityFailure, transformCity } from '@/utils/city'
+import { mapState } from 'vuex'
 export default Vue.extend({
   name: 'CityPage',
   components: { NavigationBar },
   data () :CityData {
     return {
-      value: '',
-      citys: [],
-      hotCitys: [],
-      origiCitys: [],
-      cityIndexs: []
+      value: ''
     }
+  },
+  computed: {
+    ...mapState(['city'])
   },
   created () {
     this.loadCityList()
+    navigator.geolocation.getCurrentPosition(position => {
+      console.log({ position })
+    }, error => {
+      console.log({ error })
+    }, {
+      // enableHightAccuracy: false,
+      timeout: 30000,
+      maximumAge: 0
+    })
   },
   methods: {
     loadCityList () {
-      const { city } = store.state
-      const curTimestamp = dayjs().valueOf()
-      const subTimestamp = curTimestamp - (city?.resTimestamp ?? curTimestamp) > 24 * 60 * 1000
-      if (!city?.citys || (city?.citys?.length > 0 && subTimestamp)) {
-        cityApi.getCityList().then((rlt) => {
-          this.origiCitys = rlt?.data?.cities ?? []
-          this.citys = this.convertCityList(this.origiCitys)
-          this.cityIndexs = this.citys.map(city => city.index)
-          this.hotCitys = this.origiCitys.filter(city => city.isHot)
-          this.$store.commit('setCity', {
-            citys: this.citys,
-            hotCitys: this.hotCitys,
-            origiCitys: this.origiCitys,
-            cityIndexs: this.cityIndexs,
-            resTimestamp: dayjs().valueOf()
-          })
-        }).catch(error => {
-          console.log('CityPage-loadCityList' + error)
-        })
-      } else {
-        this.citys = city.citys
-        this.hotCitys = city.hotCitys
-        this.cityIndexs = city.cityIndexs
-        this.origiCitys = city.origiCitys
-      }
-    },
-
-    convertCityList (list:SubCityItem[]) {
-      const citys:CityItem[] = []
-      const letters:string[] = []
-
-      for (let i = 65; i < 91; i++) {
-        /** 生成26个字母的字符串数组 */
-        letters.push(String.fromCharCode(i))
-      }
-
-      for (let m = 0, len = letters.length; m < len; m++) {
-        const subCitys = list.filter(item => item.pinyin.substring(0, 1).toUpperCase() === letters[m])
-        if (subCitys.length > 0) {
-          citys.push({ index: letters[m], subCitys })
-        }
-      }
-
-      return citys
+      cityFailure() && transformCity()
     },
     onSearch (value:string) {
       console.log('onSearch', value)
