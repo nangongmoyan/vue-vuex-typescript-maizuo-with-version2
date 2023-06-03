@@ -10,6 +10,7 @@ export default new Vuex.Store({
     user: JSON.parse(window.localStorage.getItem('user') || 'null'),
     city: JSON.parse(window.localStorage.getItem('city') || 'null'),
     location: JSON.parse(window.localStorage.getItem('location') || 'null'),
+    districts: JSON.parse(window.localStorage.getItem('districts') || 'null'),
     currentCity: JSON.parse(window.localStorage.getItem('currentCity') || 'null')
   },
   getters: {
@@ -30,6 +31,10 @@ export default new Vuex.Store({
     setLocation (state, payload) {
       state.location = payload
       window.localStorage.setItem('location', JSON.stringify(payload))
+    },
+    setDistricts (state, payload) {
+      state.districts = payload
+      window.localStorage.setItem('districts', JSON.stringify(payload))
     },
     setCurrentCity (state, payload) {
       const currentCity = (state.city.origiCitys as SubCityItem[]).find(item => item.cityId === payload)

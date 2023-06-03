@@ -33,11 +33,9 @@ export default Vue.extend({
 <style lang="scss" scoped>
 .cinema-item-main{
   display: flex;
-  height:4.7188rem;
+  height:3.75rem;
   background-color: #fff;
   align-items: center;
-  padding: 0 15px;
-  border-bottom: 0.5px solid #f3f4f6;
   .cinema-left{
     display: flex;
     flex-direction: column;

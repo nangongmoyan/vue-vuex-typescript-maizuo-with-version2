@@ -2,7 +2,7 @@
 import store from '@/store'
 import { CinemaItem } from '../modules'
 import { calculateDistance } from '../../city'
-
+import { uniqBy } from 'lodash'
 export const convertCinemas = (cinemas:CinemaItem[]) => {
   let rlt = cinemas
   const { location } = store.state
@@ -12,5 +12,11 @@ export const convertCinemas = (cinemas:CinemaItem[]) => {
       return { ...cinema, distance }
     })
   }
+
+  const districts = [{ text: '全部地区', value: 0 }].concat(uniqBy(rlt.map(item => item.district), 'name').map(item => {
+    return { text: item.name, value: item.districtId }
+  }))
+
+  store.commit('setDistricts', districts)
   return rlt.sort((a, b) => a.distance - b.distance)
 }

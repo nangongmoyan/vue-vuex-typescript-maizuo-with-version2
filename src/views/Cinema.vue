@@ -1,27 +1,31 @@
 <template>
   <div class="cinema-main">
-    <cinema-header/>
-    <div class="cinema-content">
-      <ul>
-        <cinema-item v-for="cinema in cinemas" :key="cinema.cinemaId" :cinema="cinema"/>
-      </ul>
+    <cinema-header @changFilter="changFilter"/>
+    <div>
+      <van-cell v-for="cinema in cinemas" :key="cinema.cinemaId"  >
+        <cinema-item :cinema="cinema"/>
+        </van-cell>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { CinemaList } from '@/features/cinema'
 import { cinemaApi } from '@/services/api'
 import Vue from 'vue'
 import CinemaItem from './cinema/components/CinemaItem.vue'
 import CinemaHeader from './cinema/components/CinemaHeader.vue'
-import BetterScroll from 'better-scroll'
-import { convertCinemas } from '@/features/cinema/utils/convertCinemas'
+import { convertCinemas, filterCinemas } from '@/features/cinema/utils'
+import { CinameData, CinemaFilter, TicketFlag } from '@/features/cinema'
+
 export default Vue.extend({
   components: { CinemaHeader, CinemaItem },
   name: 'CinemaBar',
-  data () :CinemaList {
+  data () :CinameData {
     return {
+      filter: {
+        districtId: 0,
+        ticketFlag: TicketFlag.APP
+      },
       cinemas: []
     }
   },
@@ -32,16 +36,18 @@ export default Vue.extend({
   methods: {
     async loadCinemaList () {
       try {
-        const { data } = await cinemaApi.cinemaList()
-        this.cinemas = convertCinemas(data.cinemas)
-        this.$nextTick(() => {
-          new BetterScroll('.cinema-content', {
-            scrollbar: { fade: true }
-          })
-        })
+        console.log('this.filter.ticketFlags', this.filter)
+        const { data } = await cinemaApi.cinemaList(this.filter.ticketFlag)
+        const cinemas = filterCinemas(convertCinemas(data.cinemas), this.filter.districtId)
+
+        this.cinemas = cinemas
       } catch (error) {
         console.log('CinemaBar-loadCinemaList' + error)
       }
+    },
+    changFilter (filter:CinemaFilter) {
+      this.filter = filter
+      this.loadCinemaList()
     }
   }
 })
@@ -51,11 +57,5 @@ export default Vue.extend({
 <style lang="scss" scoped>
   .cinema-main{
     background: #f4f4f4;
-  }
-  .cinema-content{
-    overflow: hidden;
-    position: relative;
-    padding-top: 5.875rem;
-    height:calc(100vh - 9rem);
   }
 </style>

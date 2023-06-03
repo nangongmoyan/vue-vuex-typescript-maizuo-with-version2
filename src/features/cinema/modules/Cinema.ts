@@ -29,6 +29,20 @@ export interface CinemaItem {
   distance: number
 }
 
+export enum TicketFlag {
+  /** APP订票 */
+  APP = '1',
+  /** 前台兑换 */
+  FRONT='2'
+}
+export interface CinemaFilter {
+  districtId: number;
+  ticketFlag: TicketFlag
+}
 export interface CinemaList {
   cinemas: CinemaItem[]
+}
+
+export interface CinameData extends CinemaList{
+  filter:CinemaFilter
 }
