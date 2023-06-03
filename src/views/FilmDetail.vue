@@ -13,17 +13,17 @@
 import { FilmDetailData } from '@/features/film'
 import { filmApi } from '@/services/api'
 import Vue from 'vue'
-import FilmActor from './components/FilmActor.vue'
-import FilmNavBar from './components/FilmNavBar.vue'
-import FilmInformation from './components/FilmInformation.vue'
-import FilmPhoto from './components/FilmPhoto.vue'
+import FilmActor from './filmDetail/FilmActor.vue'
+import FilmNavBar from './filmDetail/FilmNavBar.vue'
+import FilmInformation from './filmDetail/FilmInformation.vue'
+import FilmPhoto from './filmDetail/FilmPhoto.vue'
 export default Vue.extend({
   name: 'FilmDetail',
   components: {
     FilmActor,
-    FilmInformation,
     FilmPhoto,
-    FilmNavBar
+    FilmNavBar,
+    FilmInformation
   },
   data ():FilmDetailData {
     return {
@@ -52,12 +52,14 @@ export default Vue.extend({
 .main{
   // height:100vh;
   background: #f4f4f4;
+  padding-bottom: 3.0625rem;
   .poster{
     width: 100%;
   }
   .film-content{
     padding: 15px;
     padding-top: 12px;
+
   }
   .toBuyTicket {
     position: fixed;

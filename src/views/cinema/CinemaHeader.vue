@@ -64,6 +64,12 @@ export default Vue.extend({
     font-weight: 500;
     text-align: center;
   }
-
 }
+::v-deep .van-dropdown-menu__bar{
+  box-shadow: none;
+  border: 0.2px solid #d2d6dc;
+}
+::v-deep .van-dropdown-menu__title{
+    font-size: 12px;
+ }
 </style>

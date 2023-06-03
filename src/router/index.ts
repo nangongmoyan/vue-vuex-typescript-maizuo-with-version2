@@ -26,7 +26,7 @@ const routes: Array<RouteConfig> = [
   {
     path: '/film/:filmId',
     name: 'FilmDetail',
-    component: () => import(/* webpackChunkName: 'filmDetail' */ '@/views/filmDetail/index.vue')
+    component: () => import(/* webpackChunkName: 'filmDetail' */ '@/views/FilmDetail.vue')
   },
   {
     path: '/cinemas',
@@ -54,8 +54,7 @@ const routes: Array<RouteConfig> = [
   {
     path: '/search',
     name: 'Search',
-    component: () => import(/* webpackChunkName: 'center' */ '@/views/Search.vue'),
-    meta: { requiresAuth: true }
+    component: () => import(/* webpackChunkName: 'center' */ '@/views/Search.vue')
   },
   {
     path: '/city',

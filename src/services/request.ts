@@ -10,6 +10,14 @@ const clientRequest = axios.create({
 
 // 请求拦截器
 clientRequest.interceptors.request.use(function (config) {
+  console.log({ config })
+  let unToast = false
+  if (config.params) {
+    const { unToast: toastValue = false, ...restParams } = config.params
+    unToast = toastValue
+    restParams && Object.assign(config.params, restParams)
+  }
+
   if (!config.headers?.['X-Host']) {
     Object.assign(config, {
       baseURL: ''
@@ -18,12 +26,9 @@ clientRequest.interceptors.request.use(function (config) {
   /** 我们就在这里通过改写 config 配置信息来实现业务功能的统一处理 */
   const { user } = store.state
   if (user && user.token) {
-    Object.assign(config.headers, {
-      'X-Token': user.token,
-      unToast: config.headers?.unToast
-    })
+    Object.assign(config.headers, { 'X-Token': user.token })
   }
-  if (!config.headers?.unToast) {
+  if (!unToast) {
     Toast.loading({
       message: '玩命加载...',
       forbidClick: true,
@@ -43,7 +48,7 @@ clientRequest.interceptors.response.use(function (response) {
   Toast.clear()
   return response.data
 }, function (error) {
-  Toast.clear()
+  setTimeout(() => Toast.clear(), 1000)
   Toast.fail('加载失败，请稍后重试')
   return Promise.reject(error)
 })

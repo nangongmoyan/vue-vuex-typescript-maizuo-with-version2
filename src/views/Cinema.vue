@@ -4,7 +4,7 @@
     <div>
       <van-cell v-for="cinema in cinemas" :key="cinema.cinemaId"  >
         <cinema-item :cinema="cinema"/>
-        </van-cell>
+      </van-cell>
     </div>
   </div>
 </template>
@@ -12,8 +12,8 @@
 <script lang="ts">
 import { cinemaApi } from '@/services/api'
 import Vue from 'vue'
-import CinemaItem from './cinema/components/CinemaItem.vue'
-import CinemaHeader from './cinema/components/CinemaHeader.vue'
+import CinemaItem from './cinema/CinemaItem.vue'
+import CinemaHeader from './cinema/CinemaHeader.vue'
 import { convertCinemas, filterCinemas } from '@/features/cinema/utils'
 import { CinameData, CinemaFilter, CinemaSort, TicketFlag } from '@/features/cinema'
 

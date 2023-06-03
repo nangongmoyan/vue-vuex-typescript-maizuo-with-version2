@@ -17,8 +17,8 @@
 import Vue from 'vue'
 import { filmApi } from '@/services/api'
 import { FilmData } from '@/features/film'
-import FilmItem from './components/FilmItem.vue'
-import FilmBanner from './components/FilmBanner.vue'
+import FilmItem from './FilmItem.vue'
+import FilmBanner from './FilmBanner.vue'
 export default Vue.extend({
   name: 'FilmList',
   components: {
@@ -72,7 +72,7 @@ export default Vue.extend({
           this.loadFilmList().then(() => {
             this.loading = false
           })
-        }, this.currentPage === 1 ? 750 : 0)
+        }, this.currentPage === 1 ? 1000 : 0)
       }
     }
 

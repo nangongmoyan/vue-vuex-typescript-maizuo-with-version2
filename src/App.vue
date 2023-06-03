@@ -1,6 +1,8 @@
 <template>
   <div>
-    <router-view v-if="currentCity"/>
+
+    <router-view v-if="currentCity">
+    </router-view>
     <bottom-tab-bar/>
   </div>
 </template>
@@ -13,6 +15,11 @@ import { cityIsFailure, convertCity, getCurrentPosition } from './features/city'
 export default Vue.extend({
   components: {
     BottomTabBar
+  },
+  data () {
+    return {
+      show: false
+    }
   },
   computed: {
     ...mapState(['currentCity'])

@@ -1,7 +1,7 @@
 <template>
+
   <div>
     <film-header class="sticky"/>
-
       <router-view :key="$route.fullPath"/>
 
   </div>
@@ -9,7 +9,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import FilmHeader from './film/components/FilmHeader.vue'
+import FilmHeader from './film/FilmHeader.vue'
 export default Vue.extend({
   name: 'FilmBar',
   components: {

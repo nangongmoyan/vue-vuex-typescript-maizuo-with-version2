@@ -29,15 +29,14 @@ export const filmApi = {
    */
   filmList: function ({ pageNum = 1, type = '1' }):Promise<FilmListResponse> {
     return clientRequest.get('/gateway', {
+      headers: { 'X-Host': 'mall.film-ticket.film.list' },
       params: {
         type,
         pageNum,
         k: 8089533,
         pageSize: 8,
+        unToast: pageNum > 1,
         cityId: store.state.currentCity.cityId
-      },
-      headers: {
-        'X-Host': 'mall.film-ticket.film.list'
       }
     })
   },
@@ -48,10 +47,9 @@ export const filmApi = {
    * @returns
    */
   filmInfo: function (filmId:string) :Promise<FilmDetailResponse> {
-    return clientRequest.get(`gateway?filmId=${filmId}&k=9800898`, {
-      headers: {
-        'X-Host': 'mall.film-ticket.film.info'
-      }
+    return clientRequest.get('/gateway', {
+      params: { filmId, k: 9800898 },
+      headers: { 'X-Host': 'mall.film-ticket.film.info' }
     })
   }
 }
