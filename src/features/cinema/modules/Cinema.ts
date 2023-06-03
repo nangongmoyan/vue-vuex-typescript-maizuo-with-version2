@@ -35,9 +35,23 @@ export enum TicketFlag {
   /** 前台兑换 */
   FRONT='2'
 }
+
+export enum CinemaSort {
+  /** 其他/不排序 */
+ NotSorted= 'noSorted',
+  /** 按价格升序 */
+ PriceAsc = 'priceAsc',
+ /** 按价格降序 */
+ PriceDesc = 'priceDesc',
+ /** 按距离升序 */
+ DistanceAsc = 'distanceAsc',
+ /** 按距离降序 */
+ DistanceDesc = 'distanceDesc'
+}
 export interface CinemaFilter {
   districtId: number;
   ticketFlag: TicketFlag
+  sort: CinemaSort
 }
 export interface CinemaList {
   cinemas: CinemaItem[]
@@ -45,4 +59,6 @@ export interface CinemaList {
 
 export interface CinameData extends CinemaList{
   filter:CinemaFilter
+  preFilter:CinemaFilter
+  originCinemas:CinemaItem[]
 }

@@ -6,6 +6,7 @@
     <van-dropdown-menu active-color="#ee0a24">
       <van-dropdown-item v-model="districtId" :options="districts" @change="sendFilter"/>
       <van-dropdown-item v-model="ticketFlag" :options="ticketFlags" @change="sendFilter"/>
+      <van-dropdown-item v-model="sort" :options="sorts" @change="sendFilter"/>
     </van-dropdown-menu>
   </div>
 </template>
@@ -14,6 +15,7 @@
 import Vue from 'vue'
 import { mapState } from 'vuex'
 import LocationAndSearchBar from '@/components/LocationAndSearchBar/LocationAndSearchBar.vue'
+import { CinemaSort, TicketFlag } from '@/features/cinema'
 export default Vue.extend({
   name: 'CinemaHeader',
   components: { LocationAndSearchBar },
@@ -23,16 +25,28 @@ export default Vue.extend({
   data () {
     return {
       districtId: 0,
-      ticketFlag: 1,
+      ticketFlag: TicketFlag.APP,
+      sort: CinemaSort.NotSorted,
       ticketFlags: [
-        { text: 'APP订票', value: 1 },
-        { text: '前台兑换', value: 2 }
+        { text: 'APP订票', value: TicketFlag.APP },
+        { text: '前台兑换', value: TicketFlag.FRONT }
+      ],
+      sorts: [
+        { text: '暂不排序', value: CinemaSort.NotSorted },
+        { text: '价格最低', value: CinemaSort.PriceAsc },
+        { text: '价格最高', value: CinemaSort.PriceDesc },
+        { text: '距离最近', value: CinemaSort.DistanceAsc },
+        { text: '价格最远', value: CinemaSort.DistanceDesc }
       ]
     }
   },
   methods: {
     sendFilter () {
-      this.$emit('changFilter', { districtId: this.districtId, ticketFlag: this.ticketFlag })
+      this.$emit('changFilter', {
+        sort: this.sort,
+        districtId: this.districtId,
+        ticketFlag: this.ticketFlag
+      })
     }
   }
 })
@@ -44,12 +58,12 @@ export default Vue.extend({
   top:0;
   z-index: 100;
   .title{
-  flex:1;
-  font-size: 16px;
-  color: #323233;
-  font-weight: 500;
-  text-align: center;
-}
-}
+    flex:1;
+    font-size: 16px;
+    color: #323233;
+    font-weight: 500;
+    text-align: center;
+  }
 
+}
 </style>

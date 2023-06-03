@@ -15,7 +15,7 @@ import Vue from 'vue'
 import CinemaItem from './cinema/components/CinemaItem.vue'
 import CinemaHeader from './cinema/components/CinemaHeader.vue'
 import { convertCinemas, filterCinemas } from '@/features/cinema/utils'
-import { CinameData, CinemaFilter, TicketFlag } from '@/features/cinema'
+import { CinameData, CinemaFilter, CinemaSort, TicketFlag } from '@/features/cinema'
 
 export default Vue.extend({
   components: { CinemaHeader, CinemaItem },
@@ -24,9 +24,16 @@ export default Vue.extend({
     return {
       filter: {
         districtId: 0,
+        sort: CinemaSort.PriceAsc,
         ticketFlag: TicketFlag.APP
       },
-      cinemas: []
+      preFilter: {
+        districtId: 0,
+        sort: CinemaSort.PriceAsc,
+        ticketFlag: TicketFlag.APP
+      },
+      cinemas: [],
+      originCinemas: []
     }
   },
   created () {
@@ -36,11 +43,14 @@ export default Vue.extend({
   methods: {
     async loadCinemaList () {
       try {
-        console.log('this.filter.ticketFlags', this.filter)
-        const { data } = await cinemaApi.cinemaList(this.filter.ticketFlag)
-        const cinemas = filterCinemas(convertCinemas(data.cinemas), this.filter.districtId)
-
-        this.cinemas = cinemas
+        if (this.filter.ticketFlag === this.preFilter.ticketFlag && this.cinemas.length > 0) {
+          this.cinemas = filterCinemas(this.originCinemas, this.filter)
+        } else {
+          const { data } = await cinemaApi.cinemaList(this.filter.ticketFlag)
+          this.originCinemas = convertCinemas(data.cinemas)
+          this.cinemas = filterCinemas(this.originCinemas, this.filter)
+        }
+        this.preFilter = this.filter
       } catch (error) {
         console.log('CinemaBar-loadCinemaList' + error)
       }
