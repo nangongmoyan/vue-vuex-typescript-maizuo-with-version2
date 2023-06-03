@@ -13,3 +13,8 @@ export interface CityItem {
 export interface CityData {
   value: string
 }
+
+export interface GetCurrentPositionParams {
+  showToast?:boolean
+  needReGet?:boolean
+}

@@ -1,6 +1,7 @@
-import { calculateDistance } from '@/utils/location'
-import { CinemaItem } from '../modules'
+
 import store from '@/store'
+import { CinemaItem } from '../modules'
+import { calculateDistance } from '../../city'
 
 export const convertCinemas = (cinemas:CinemaItem[]) => {
   let rlt = cinemas

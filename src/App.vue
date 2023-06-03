@@ -1,6 +1,6 @@
 <template>
   <div>
-    <router-view/>
+    <router-view v-if="currentCity"/>
     <bottom-tab-bar/>
   </div>
 </template>
@@ -8,20 +8,30 @@
 <script lang="ts">
 import Vue from 'vue'
 import BottomTabBar from '@/components/BottomTabBar/index.vue'
-import { cityFailure, transformCity } from './utils/city'
-import { getLocation } from './utils/location'
+import { mapState } from 'vuex'
+import { cityIsFailure, convertCity, getCurrentPosition } from './features/city'
 export default Vue.extend({
   components: {
     BottomTabBar
   },
+  computed: {
+    ...mapState(['currentCity'])
+  },
   created () {
     this.moYanFilmInit()
-    getLocation()
   },
   methods: {
     moYanFilmInit () {
-      if (cityFailure()) {
-        transformCity()
+      /** 1.前提：地址数据要有 */
+      /** 1.1 地址数据如果缓存有责不请求 */
+      /** 2.进行定位处理 */
+      /** 2.1在第一次打开的时候进行定位，定位成功缓存起来，缓存有数据则不请求，缓存没数据则请求 */
+
+      /** 地址数据失效，发起请求 */
+      if (cityIsFailure()) {
+        convertCity().then(_ => {
+          getCurrentPosition({})
+        })
       }
     }
   }

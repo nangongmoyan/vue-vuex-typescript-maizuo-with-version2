@@ -34,7 +34,6 @@ export default new Vuex.Store({
     setCurrentCity (state, payload) {
       const currentCity = (state.city.origiCitys as SubCityItem[]).find(item => item.cityId === payload)
       state.currentCity = currentCity
-      console.log({ currentCity })
       window.localStorage.setItem('currentCity', JSON.stringify(currentCity))
     }
   },

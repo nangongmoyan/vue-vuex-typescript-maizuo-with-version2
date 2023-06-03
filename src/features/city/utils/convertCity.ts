@@ -3,7 +3,7 @@ import { cityApi } from '@/services/api'
 import store from '@/store'
 import dayjs from 'dayjs'
 
-export const transformCity = async () => {
+export const convertCity = async () => {
   const rlt = await cityApi.getCityList()
   /** 接口返回的城市列表数据 */
   const origiCitys = rlt?.data?.cities ?? []
@@ -21,6 +21,8 @@ export const transformCity = async () => {
     cityIndexs,
     resTimestamp: dayjs().valueOf()
   })
+
+  console.log('convertCity end')
   return { citys, hotCitys, cityIndexs, origiCitys }
 }
 

@@ -42,10 +42,10 @@
 </template>
 
 <script lang="ts">
-import { CityData } from '@/features/city'
+import { CityData, cityIsFailure, convertCity, getCurrentPosition } from '@/features/city'
 import Vue from 'vue'
 import NavigationBar from '@/components/NavigationBar/index.vue'
-import { cityFailure, transformCity } from '@/utils/city'
+
 import { mapState } from 'vuex'
 export default Vue.extend({
   name: 'CityPage',
@@ -59,20 +59,13 @@ export default Vue.extend({
     ...mapState(['city'])
   },
   created () {
+    getCurrentPosition({ showToast: true, needReGet: true })
+
     this.loadCityList()
-    navigator.geolocation.getCurrentPosition(position => {
-      console.log({ position })
-    }, error => {
-      console.log({ error })
-    }, {
-      // enableHightAccuracy: false,
-      timeout: 30000,
-      maximumAge: 0
-    })
   },
   methods: {
     loadCityList () {
-      cityFailure() && transformCity()
+      cityIsFailure() && convertCity()
     },
     onSearch (value:string) {
       console.log('onSearch', value)

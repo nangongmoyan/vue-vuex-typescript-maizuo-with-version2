@@ -1,5 +1,5 @@
 <template>
-  <div class="city-entry" v-if="currentCity">
+  <div class="city-entry" v-if="currentCity" @click="goToCity">
     <span class="city-name">{{ currentCity.name }}</span>
     <van-icon name="arrow-down" size="10" color="#F03D37" />
   </div>
@@ -13,6 +13,11 @@ export default Vue.extend({
   name: 'CityEntry',
   computed: {
     ...mapState(['currentCity'])
+  },
+  methods: {
+    goToCity () {
+      this.$router.push('/city')
+    }
   }
 
 })

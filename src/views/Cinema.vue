@@ -1,6 +1,6 @@
 <template>
   <div class="cinema-main">
-    <cinema-nav-bar/>
+    <cinema-header/>
     <div class="cinema-content">
       <ul>
         <cinema-item v-for="cinema in cinemas" :key="cinema.cinemaId" :cinema="cinema"/>
@@ -14,11 +14,11 @@ import { CinemaList } from '@/features/cinema'
 import { cinemaApi } from '@/services/api'
 import Vue from 'vue'
 import CinemaItem from './cinema/components/CinemaItem.vue'
-import CinemaNavBar from './cinema/components/CinemaNavBar.vue'
+import CinemaHeader from './cinema/components/CinemaHeader.vue'
 import BetterScroll from 'better-scroll'
 import { convertCinemas } from '@/features/cinema/utils/convertCinemas'
 export default Vue.extend({
-  components: { CinemaNavBar, CinemaItem },
+  components: { CinemaHeader, CinemaItem },
   name: 'CinemaBar',
   data () :CinemaList {
     return {

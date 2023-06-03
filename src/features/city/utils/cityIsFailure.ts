@@ -1,7 +1,11 @@
 import store from '@/store'
 import dayjs from 'dayjs'
 
-export const cityFailure = () => {
+/**
+ * 判断缓存city失效
+ * @returns
+ */
+export const cityIsFailure = () => {
   const { city } = store.state
   const curTimestamp = dayjs().valueOf()
   const subTimestamp = curTimestamp - (city?.resTimestamp ?? curTimestamp) > 24 * 60 * 1000

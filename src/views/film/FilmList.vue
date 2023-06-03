@@ -43,7 +43,6 @@ export default Vue.extend({
   methods: {
     async loadFilmList () {
       try {
-        console.log(' this.currentPage', this.currentPage)
         const { data } = await filmApi.filmList({
           pageNum: this.currentPage,
           type: this.$route.params.type

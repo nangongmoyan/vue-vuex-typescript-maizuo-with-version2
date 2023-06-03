@@ -1,29 +1,24 @@
 <template>
-  <div class="film-header">
-    <city-entry/>
+  <location-and-search-bar>
     <van-tabs v-model="active" animated style="flex:1" title-active-color="#F03D37">
       <van-tab
       v-for="tab in tabs"
       :key="tab.path"
       :title="tab.title"
       :to="tab.path"
-
       />
     </van-tabs>
-    <search-icon/>
-  </div>
-
+  </location-and-search-bar>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import CityEntry from '@/components/City/CityEntry.vue'
-import SearchIcon from '@/components/Search/SearchIcon.vue'
+
+import LocationAndSearchBar from '@/components/LocationAndSearchBar/LocationAndSearchBar.vue'
 export default Vue.extend({
   name: 'FilmHeader',
   components: {
-    CityEntry,
-    SearchIcon
+    LocationAndSearchBar
   },
   data () {
     return {
