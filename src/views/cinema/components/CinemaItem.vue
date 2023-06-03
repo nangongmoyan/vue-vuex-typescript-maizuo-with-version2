@@ -60,9 +60,9 @@ export default Vue.extend({
   }
   .cinema-right{
     display: flex;
-    flex-direction: column;
     margin-left: auto;
-    text-align: center;
+    align-items: flex-end;
+    flex-direction: column;
     .price-fmt {
       font-size: 15px;
       color: #F03D37;
