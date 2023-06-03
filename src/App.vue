@@ -1,6 +1,6 @@
 <template>
   <div>
-      <router-view/>
+    <router-view/>
     <bottom-tab-bar/>
   </div>
 </template>
@@ -11,6 +11,17 @@ import BottomTabBar from '@/components/BottomTabBar/index.vue'
 export default Vue.extend({
   components: {
     BottomTabBar
+  },
+  created () {
+    navigator.geolocation.getCurrentPosition(position => {
+      console.log({ position })
+    }, error => {
+      console.log({ error })
+    }, {
+      // enableHightAccuracy: false,
+      timeout: 30000,
+      maximumAge: 0
+    })
   }
 })
 </script>
