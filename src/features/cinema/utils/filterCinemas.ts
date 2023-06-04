@@ -9,18 +9,19 @@ export const filterCinemas = (cinemas:CinemaItem[], filter:CinemaFilter) => {
 
   switch (sort) {
     case CinemaSort.PriceAsc:
-      rltCinemas = cinemas.sort((a, b) => a.lowPrice - b.lowPrice)
+      rltCinemas = rltCinemas.sort((a, b) => a.lowPrice - b.lowPrice)
       break
     case CinemaSort.PriceDesc:
-      rltCinemas = cinemas.sort((a, b) => b.lowPrice - a.lowPrice)
+      rltCinemas = rltCinemas.sort((a, b) => b.lowPrice - a.lowPrice)
       break
     case CinemaSort.DistanceAsc:
-      rltCinemas = cinemas.sort((a, b) => b.distance - a.distance)
+      rltCinemas = rltCinemas.sort((a, b) => b.distance - a.distance)
       break
     case CinemaSort.DistanceDesc:
-      rltCinemas = cinemas.sort((a, b) => b.distance - a.distance)
+      rltCinemas = rltCinemas.sort((a, b) => b.distance - a.distance)
       break
   }
 
+  console.log({ rltCinemas })
   return rltCinemas
 }

@@ -36,7 +36,7 @@ export default Vue.extend({
         { text: '价格最低', value: CinemaSort.PriceAsc },
         { text: '价格最高', value: CinemaSort.PriceDesc },
         { text: '距离最近', value: CinemaSort.DistanceAsc },
-        { text: '价格最远', value: CinemaSort.DistanceDesc }
+        { text: '距离最远', value: CinemaSort.DistanceDesc }
       ]
     }
   },

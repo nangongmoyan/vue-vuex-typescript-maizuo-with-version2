@@ -24,12 +24,12 @@ export default Vue.extend({
     return {
       filter: {
         districtId: 0,
-        sort: CinemaSort.PriceAsc,
+        sort: CinemaSort.NotSorted,
         ticketFlag: TicketFlag.APP
       },
       preFilter: {
         districtId: 0,
-        sort: CinemaSort.PriceAsc,
+        sort: CinemaSort.NotSorted,
         ticketFlag: TicketFlag.APP
       },
       cinemas: [],
@@ -43,7 +43,7 @@ export default Vue.extend({
   methods: {
     async loadCinemaList () {
       try {
-        if (this.filter.ticketFlag === this.preFilter.ticketFlag && this.cinemas.length > 0) {
+        if (this.filter.ticketFlag === this.preFilter.ticketFlag && this.originCinemas.length > 0) {
           this.cinemas = filterCinemas(this.originCinemas, this.filter)
         } else {
           const { data } = await cinemaApi.cinemaList(this.filter.ticketFlag)

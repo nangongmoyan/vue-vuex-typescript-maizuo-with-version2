@@ -10,7 +10,6 @@ const clientRequest = axios.create({
 
 // 请求拦截器
 clientRequest.interceptors.request.use(function (config) {
-  console.log({ config })
   let unToast = false
   if (config.params) {
     const { unToast: toastValue = false, ...restParams } = config.params
