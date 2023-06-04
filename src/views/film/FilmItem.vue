@@ -8,7 +8,7 @@
     />
     <div class="film-info">
       <div class="film-info-name">
-        <span class="film-name">{{ film.name }}{{ film.name }}</span>
+        <span class="film-name">{{ film.name }}</span>
         <span class="film-type">{{ film.filmType.name }}</span>
       </div>
       <div class="film-grade" v-if="film.grade">
